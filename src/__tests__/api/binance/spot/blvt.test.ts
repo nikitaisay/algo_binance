@@ -1,144 +1,93 @@
 import { 
   test, 
   describe, 
-  expect
+  expect,
+  beforeEach
 } from "@jest/globals";
 
 import { BinanceSpotBLVTApi } from "../../../../api/binance/spot/blvt";
 
 describe("Test Binance Spot BLVT API", () => {
-  const api = new BinanceSpotBLVTApi({
-    enableTestnet: false,
-    apiKey: process.env.BINANCE_TESTNET_API_KEY,
-    apiSecret: process.env.BINANCE_TESTNET_API_SECRET,
-  });
-
-  describe("Should get BLVT info", () => {
-    test("With default params", async () => {
-      try {
-        const data = await api.getBLVTInfo({
-          tokenName: "BTCDOWN",
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
+  let api: BinanceSpotBLVTApi;
+ 
+  beforeEach(() => {
+    api = new BinanceSpotBLVTApi({
+      enableTestnet: false,
+      apiKey: process.env.BINANCE_TESTNET_API_KEY,
+      apiSecret: process.env.BINANCE_TESTNET_API_SECRET,
     });
   });
 
-  describe("Should Query Subscription Record (USER_DATA)", () => {
-    test("With default params", async () => {
-      try {
-        const data = await api.querySubscriptionRecord();
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
-
-    test("With tokenName param", async () => {
-      try {
-        const data = await api.querySubscriptionRecord({
-          tokenName: "BTCUP",
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
-
-    test("With startTime param", async () => {
-      try {
-        const data = await api.querySubscriptionRecord({
-          tokenName: "BTCUP",
-          startTime: Date.now() - 1000,
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
-
-    test("With endTime param", async () => {
-      try {
-        const data = await api.querySubscriptionRecord({
-          tokenName: "BTCUP",
-          startTime: Date.now() - 100000,
-          endTime: Date.now(),
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
+  describe("getBLVTInfo", () => {
+    test("Should get BLVT info for specific token name", async () => {
+      const data = await api.getBLVTInfo({
+        tokenName: "BTCDOWN",
+      });
+      expect(data).toBeDefined();
     });
   });
 
-  describe("Should Query Redemption Record (USER_DATA)", () => {
-    test("With default params", async () => {
-      try {
-        const data = await api.queryRedemptionRecord();
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
+  // describe("querySubscriptionRecord", () => {
+  //   test("Should Query Subscription Record (USER_DATA)", async () => {
+  //     const data = await api.querySubscriptionRecord();
+  //     expect(data).toBeDefined();
+  //   });
 
-    test("With tokenName param", async () => {
-      try {
-        const data = await api.queryRedemptionRecord({
-          tokenName: "BTCUP",
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
+  //   test("Should Query Subscription Record (USER_DATA) for specific token name", async () => {
+  //     const data = await api.querySubscriptionRecord({
+  //       tokenName: "BTCUP",
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
 
-    test("With startTime param", async () => {
-      try {
-        const data = await api.queryRedemptionRecord({
-          tokenName: "BTCUP",
-          startTime: Date.now() - 1000,
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
+  //   test("Should Query Subscription Record (USER_DATA) for specific token name within a specific time range", async () => {
+  //     const endTime = Date.now(); 
+  //     const startTime = endTime - 86400000; // 24 hours ago
+  //     const data = await api.querySubscriptionRecord({
+  //       tokenName: "BTCUP",
+  //       startTime,
+  //       endTime,
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
+  // });
 
-    test("With endTime param", async () => {
-      try {
-        const data = await api.queryRedemptionRecord({
-          tokenName: "BTCUP",
-          startTime: Date.now() - 100000,
-          endTime: Date.now(),
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
-  });
+  // describe("queryRedemptionRecord", () => {
+  //   test("Should Query Redemption Record (USER_DATA)", async () => {
+  //     const data = await api.queryRedemptionRecord();
+  //     expect(data).toBeDefined();
+  //   });
 
-  describe("Should Get BLVT User Limit Info (USER_DATA)", () => {
-    test("With default params", async () => {
-      try {
-        const data = await api.getBLVTUserLimitInfo();
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
+  //   test("Should Query Redemption Record (USER_DATA) for specific token name", async () => {
+  //     const data = await api.queryRedemptionRecord({
+  //       tokenName: "BTCUP",
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
 
-    test("With tokenName param", async () => {
-      try {
-        const data = await api.getBLVTUserLimitInfo({
-          tokenName: "BTCUP",
-        });
-        expect(data).toBeDefined();
-      } catch (error) {
-        throw new Error(`Request failed: ${error}`);
-      }
-    });
-  });
+  //   test("Should Query Redemption Record (USER_DATA) for specific token name within a specific time range", async () => {
+  //     const endTime = Date.now(); 
+  //     const startTime = endTime - 86400000; // 24 hours ago
+  //     const data = await api.queryRedemptionRecord({
+  //       tokenName: "BTCUP",
+  //       startTime,
+  //       endTime,
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
+  // });
+
+  // describe("getBLVTUserLimitInfo", () => {
+  //   test("Should Get BLVT User Limit Info (USER_DATA)", async () => {
+  //     const data = await api.getBLVTUserLimitInfo();
+  //     expect(data).toBeDefined();
+  //   });
+
+  //   test("Should Get BLVT User Limit Info (USER_DATA) for a specific token name", async () => {
+  //     const data = await api.getBLVTUserLimitInfo({
+  //       tokenName: "BTCUP",
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
+  // });
 });

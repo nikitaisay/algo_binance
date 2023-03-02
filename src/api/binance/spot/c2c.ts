@@ -26,7 +26,6 @@ export class BinanceSpotC2CApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }

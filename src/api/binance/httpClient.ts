@@ -27,37 +27,25 @@ export class BinanceApiClient {
     this.apiSecret = options.apiSecret;
   }
 
-  private getTimestamp() {
-    return Date.now();
-  }
+  private buildQueryString<P>(params: P): string {
+    if (!params) {
+      return "";
+    }
 
-  private makeQueryString<P>(params: P): string {
-    return Object.keys(params)
-      .sort()
-      .map((key) => `${key}=${params[key]}`)
+    return Object.entries(params)
+      .map(([key, value]) => `${key}=${encodeURIComponent(this.stringifyData(value))}`)
       .join("&");
   }
 
-  private createSignature(queryString: string): string {
-    const timestamp = this.getTimestamp();
-
-    return crypto
-      .createHmac("sha256", this.apiSecret)
-      .update(`${queryString}&timestamp=${timestamp}`)
-      .digest("hex");
+  private stringifyData<V>(value: V): string | V {
+    return Array.isArray(value) ? `["${value.join("\",\"")}"]` : value;
   }
 
-  private signRequest<P>(path: string, params: P) {
-    const timestamp = this.getTimestamp();
-    const queryString = this.makeQueryString(params);
-    const signature = this.createSignature(queryString);
-
-    return {
-      url: `/${path}?${queryString}&timestamp=${timestamp}&signature=${signature}`,
-      headers: {
-        "X-MBX-APIKEY": this.apiKey,
-      },
-    };
+  private createSignature(queryString: string): string {
+    return crypto
+      .createHmac("sha256", this.apiSecret)
+      .update(queryString)
+      .digest("hex");
   }
 
   private async signedRequest<P, D>(
@@ -66,14 +54,22 @@ export class BinanceApiClient {
     params: P,
     data: D
   ) {
-    const { url, headers, } = this.signRequest(path, params);
+    const timestamp = Date.now();
+    const queryString = this.buildQueryString({ ...params, timestamp, });
+    const signature = this.createSignature(queryString);
     const requestBody = data ? JSON.stringify(data) : undefined;
 
     const response = await this.request({
+      path,
       method,
-      headers,
-      path: url,
-      params: params,
+      params: {
+        ...params,
+        signature,
+        timestamp,
+      },
+      headers: {
+        "X-MBX-APIKEY": this.apiKey,
+      },
       data: requestBody,
     });
 
@@ -81,11 +77,17 @@ export class BinanceApiClient {
   }
 
   private async request<P, D>(options: IHttpClientRequestConfig<P, D>) {
+    const stringifiedParams = Object.entries(options.params || {})
+      .reduce((acc, [key, value]) => {
+        acc[key] = this.stringifyData(value);
+        return acc;
+      }, {});
+
     const config: Record<string, unknown> = {
       url: options.path,
       method: options.method,
       baseURL: this.url,
-      params: options.params,
+      params: stringifiedParams,
       data: options.data,
     };
 
@@ -100,6 +102,7 @@ export class BinanceApiClient {
   }
 
   throwError(error: httpClientError) {
+    console.log(error);
     throw new Error(error?.message || DEFAULT_REQUEST_ERROR_MESSAGE);
   }
 

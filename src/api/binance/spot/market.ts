@@ -33,7 +33,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -46,7 +45,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -60,7 +58,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -74,7 +71,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -88,7 +84,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -102,7 +97,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -116,7 +110,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -130,7 +123,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -144,7 +136,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -158,7 +149,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -172,7 +162,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
@@ -186,7 +175,6 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
       });
       return res.data;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }

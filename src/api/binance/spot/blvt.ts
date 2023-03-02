@@ -41,7 +41,7 @@ export class BinanceSpotBLVTApi extends BinanceApiClient {
         path: "/sapi/v1/blvt/subscribe/record",
         params: options,
       });
-      return res.data;
+      return res;
     } catch (error) {
       console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
@@ -55,7 +55,7 @@ export class BinanceSpotBLVTApi extends BinanceApiClient {
         path: "/sapi/v1/blvt/redeem/record",
         params: options,
       });
-      return res.data;
+      return res;
     } catch (error) {
       console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
@@ -69,7 +69,7 @@ export class BinanceSpotBLVTApi extends BinanceApiClient {
         path: "/sapi/v1/blvt/userLimit",
         params: options,
       });
-      return res.data;
+      return res;
     } catch (error) {
       console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);

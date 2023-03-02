@@ -37,7 +37,7 @@ export class BinanceSpotBSwapApi extends BinanceApiClient {
         path: "/sapi/v1/bswap/liquidity",
         params: options,
       });
-      return res.data;
+      return res;
     } catch (error) {
       console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
