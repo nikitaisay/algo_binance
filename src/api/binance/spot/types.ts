@@ -254,11 +254,72 @@ export interface ICheckCollateralRepayRateOptions {
   recvWindow?: number; // default 5000 The value cannot be greater than 60000
 }
 
-export interface IGetFiatDepositWithdrawHistoryOptions {
-  transactionType: 0 | 1; // 0 - deposit, 1 - withdraw
-  beginTime?: number; // UTC timestamp in ms
-  endTime?: number; // UTC timestamp in ms
-  page?: number; // Default 1
-  rows?: number; // Default 100, max 500
+export interface IGetFuturesAccountTransactionHistoryListOptions {
+  asset: string;
+  startTime: number;
+  endTime?: number;
+  current?: number; // Currently querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetCrossCollateralBorrowHistoryOptions {
+  coin?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number; // default 500, max 1000
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetCrossCollateralRepaymentHistoryOptions {
+  coin?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number; // default 500, max 1000
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetCrossCollateralWalletV2Options {
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IAdjustCrossCollateralLTVHistoryOptions {
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+  loanCoin?: string;
+  collateralCoin?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number; // default 500, max 1000
+}
+
+export interface IGetCrossCollateralLiquidationHistoryOptions {
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+  loanCoin?: string;
+  collateralCoin?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number; // default 500, max 1000
+}
+
+export interface IGetCrossCollateralInterestHistoryOptions {
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+  collateralCoin?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number; // default 500, max 1000
+  current?: number; // Currently querying page. Start from 1. Default:1
+}
+
+export interface IVerifyBinanceCodeOptions {
+  referenceNo: string; // reference number
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetTokenLimitOptions {
+  baseToken: string; // The token you want to pay, example: BUSD
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetRSAPublicKeyOptions {
   recvWindow?: number; // default 5000 The value cannot be greater than 60000
 }
