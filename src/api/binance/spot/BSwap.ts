@@ -5,7 +5,15 @@ import { BinanceApiClient } from "../httpClient";
 import { IApiClientInitializeOptions } from "../types";
 
 import { 
-  IGetLiquidityInformationOfPoolOptions
+  IGetLiquidityInformationOfPoolOptions, 
+  IGetLiquidityOperationRecordOptions,
+  IGetRequestQuoteOptions,
+  IGetSwapHistoryOptions,
+  IGetPoolConfigureOptions,
+  IAddLiquidityPreviewOptions,
+  IRemoveLiquidityPreviewOptions,
+  IGetUnclaimedRewardsRecordOptions,
+  IGetClaimedHistoryOptions
 } from "./types";
 
 
@@ -35,6 +43,118 @@ export class BinanceSpotBSwapApi extends BinanceApiClient {
       const res = await this.privateRequest({
         method: RequestType.GET,
         path: "/sapi/v1/bswap/liquidity",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getLiquidityOperationRecord(options: IGetLiquidityOperationRecordOptions = {}) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/liquidityOps",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getRequestQuote(options: IGetRequestQuoteOptions) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/quote",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getSwapHistory(options: IGetSwapHistoryOptions = {}) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/swap",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getPoolConfigure(options: IGetPoolConfigureOptions = {}) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/poolConfigure",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async addLiquidityPreview(options: IAddLiquidityPreviewOptions) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/addLiquidityPreview",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async removeLiquidityPreview(options: IRemoveLiquidityPreviewOptions) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/removeLiquidityPreview",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getUnclaimedRewardsRecord(options: IGetUnclaimedRewardsRecordOptions = {}) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/unclaimedRewards",
+        params: options,
+      });
+      return res;
+    } catch (error) {
+      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getClaimedHistory(options: IGetClaimedHistoryOptions = {}) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/bswap/claimedHistory",
         params: options,
       });
       return res;
