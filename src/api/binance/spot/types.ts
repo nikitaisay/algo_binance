@@ -323,3 +323,211 @@ export interface IGetTokenLimitOptions {
 export interface IGetRSAPublicKeyOptions {
   recvWindow?: number; // default 5000 The value cannot be greater than 60000
 }
+
+export interface IGetCrossMarginTransferHistoryOptions {
+  asset?: string;
+  type?: "ROLL_IN" | "ROLL_OUT"; // Transfer Type
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  current?: number; // Current querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  archived?: boolean; // Default: false. Set to true for archived data from 6 months ago
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetDetailMinerListOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  workerName: string; // Miner’s name
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetMinerListOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  pageIndex?: number; // Page number, default is first page, start form 1
+  sort?: 0 | 1; // sort sequence（default=0）0 positive sequence, 1 negative sequence
+  sortColumn?: 1 | 2 | 3 | 4 | 5; // Sort by( default 1): 1: miner name, 2: real-time computing power, 3: daily average computing power, 4: real-time rejection rate, 5: last submission time
+  workerStatus?: 0 | 1 | 2 | 3; // miners status（default=0）0 all, 1 valid, 2 invalid, 3 failure
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetEarningsListOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  coin?: string; // Coin name
+  startDate?: number; // Search date, millisecond timestamp, while empty query all
+  endDate?: number; // Search date, millisecond timestamp, while empty query all
+  pageIndex?: number; // Number of pages, minimum 10, maximum 200
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetExtraBonusListOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  coin?: string; // Coin name
+  startDate?: number; // Search date, millisecond timestamp, while empty query all
+  endDate?: number; // Search date, millisecond timestamp, while empty query all
+  pageIndex?: number; // Number of pages, minimum 10, maximum 200
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetHashrateResaleListOptions {
+  pageIndex?: number; // Page number, default is first page, start form 1
+  pageSize?: number; // Number of pages, minimum 10, maximum 200
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetHashrateResaleDetailOptions {
+  configId: number; // Mining ID
+  userName: string; // Mining Account
+  pageIndex?: number; // Page number, default is first page, start form 1
+  pageSize?: number; // Number of pages, minimum 10, maximum 200
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetStatisticListOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetAccountListOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetMiningAccountEarningOptions {
+  algo: string; // Algorithm(sha256)
+  userName: string; // Mining Account
+  startDate?: number; // Search date, millisecond timestamp, while empty query all
+  endDate?: number; // Search date, millisecond timestamp, while empty query all
+  pageIndex?: number; // Page number, default is first page, start form 1
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetNftTransactionHistoryOptions {
+  orderType: 0 | 1 | 2 | 3 | 4; // 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  limit?: number; // Default 50, Max 50
+  page?: number; // Default 1
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetNftDepositHistoryOptions {
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  limit?: number; // Default 50, Max 50
+  page?: number; // Default 1
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetNftWithdrawHistoryOptions {
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  limit?: number; // Default 50, Max 50
+  page?: number; // Default 1
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetNftAssetOptions {
+  limit?: number; // Default 50, Max 50
+  page?: number; // Default 1
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetPayTradeHistoryOptions {
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  limit?: number; // Default 50, Max 50
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetPortfolioMarginAccountInfoOptions {
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetSpotRebateHistoryRecordsOptions {
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  page?: number; // default 1
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetInterestHistoryOptions {
+  lendingType: "DAILY" | "ACTIVITY" | "CUSTOMIZED_FIXED";
+  asset?: string;
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  current?: number; // Current querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetFlexibleProductListOptions {
+  status?: string; // Default `ALL`
+  featured?: string; // Default `ALL`
+  current?: number; // Current querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetLeftDailyPurchaseQuotaOfFlexibleProductOptions {
+  productId: string;
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetLeftDailyRedemptionQuotaOfFlexibleProductOptions {
+  productId: string;
+  type: "FAST" | "NORMAL";
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetFlexibleProductPositionOptions {
+  asset: string;
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetFixedAndActivityProjectListOptions {
+  asset?: string;
+  type: "ACTIVITY" | "CUSTOMIZED_FIXED";
+  status?: string; // Default `ALL`
+  isSortAsc?: boolean; // default "true"
+  sortBy?: string; // Default `START_TIME`
+  current?: number; // Current querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetFixedActivityProjectPositionOptions {
+  asset: string;
+  projectId?: string;
+  status?: string; // Default `ALL`
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetLendingAccountOptions {
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetPurchaseRecordOptions {
+  lendingType: "DAILY" | "ACTIVITY" | "CUSTOMIZED_FIXED";
+  asset?: string;
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  current?: number; // Current querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}
+
+export interface IGetRedemptionRecordOptions {
+  lendingType: "DAILY" | "ACTIVITY" | "CUSTOMIZED_FIXED";
+  asset?: string;
+  startTime?: number; // UTC timestamp in ms
+  endTime?: number; // UTC timestamp in ms
+  current?: number; // Current querying page. Start from 1. Default:1
+  size?: number; // Default:10 Max:100
+  recvWindow?: number; // default 5000 The value cannot be greater than 60000
+}

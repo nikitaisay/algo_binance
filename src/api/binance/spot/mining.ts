@@ -5,19 +5,18 @@ import { BinanceApiClient } from "../httpClient";
 import { IApiClientInitializeOptions } from "../types";
 
 import { 
-  IGet24hrTickerPriceChangeStatisticsOptions,
-  IGetAggregateTradesListOptions,
-  IGetCandlestickDataOptions,
-  IGetCurrentAveragePriceOptions,
-  IGetExchangeInfoOptions, 
-  IGetOrderBookOptions, 
-  IGetRecentTradesListOptions, 
-  IGetRollingWindowPriceChangeStatisticsOptions, 
-  IGetSymbolPriceTickerOptions
+  IGetAccountListOptions,
+  IGetDetailMinerListOptions, 
+  IGetEarningsListOptions, 
+  IGetExtraBonusListOptions, 
+  IGetHashrateResaleDetailOptions, 
+  IGetHashrateResaleListOptions, 
+  IGetMinerListOptions, 
+  IGetMiningAccountEarningOptions, 
+  IGetStatisticListOptions
 } from "./types";
 
-
-export class BinanceSpotMarketApi extends BinanceApiClient {
+export class BinanceSpotMiningApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
     this.baseApiUrl = BINANCE_API_URLS.SPOT.BASE;
@@ -25,11 +24,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 
-  async testConnectivity() {
+  async getAcquiringAlgorithm() {
     try {
-      const res = await this.publicRequest({
+      const res = await this.keyedRequest({
         method: RequestType.GET,
-        path: "/api/v3/ping",
+        path: "/sapi/v1/mining/pub/algoList",
       });
       return res.data;
     } catch (error) {
@@ -37,11 +36,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async checkServerTime() {
+  async getAcquiringCoinName() {
     try {
-      const res = await this.publicRequest({
+      const res = await this.keyedRequest({
         method: RequestType.GET,
-        path: "/api/v3/time",
+        path: "/sapi/v1/mining/pub/coinList",
       });
       return res.data;
     } catch (error) {
@@ -49,11 +48,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getExchangeInfo(options: IGetExchangeInfoOptions = {}) {
+  async getDetailMinerList(options: IGetDetailMinerListOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/exchangeInfo",
+        path: "/sapi/v1/mining/worker/detail",
         params: options,
       });
       return res.data;
@@ -62,11 +61,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getOrderBook(options: IGetOrderBookOptions) {
+  async getMinerList(options: IGetMinerListOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/depth",
+        path: "/sapi/v1/mining/worker/list",
         params: options,
       });
       return res.data;
@@ -75,11 +74,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getRecentTradesList(options: IGetRecentTradesListOptions) {
+  async getEarningsList(options: IGetEarningsListOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/depth",
+        path: "/sapi/v1/mining/payment/list",
         params: options,
       });
       return res.data;
@@ -88,11 +87,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getAggregateTradesList(options: IGetAggregateTradesListOptions) {
+  async getExtraBonusList(options: IGetExtraBonusListOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/aggTrades",
+        path: "/sapi/v1/mining/payment/other",
         params: options,
       });
       return res.data;
@@ -101,11 +100,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getCandlestickData(options: IGetCandlestickDataOptions) {
+  async getHashrateResaleList(options: IGetHashrateResaleListOptions = {}) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/klines",
+        path: "/sapi/v1/mining/hash-transfer/config/details/list",
         params: options,
       });
       return res.data;
@@ -114,11 +113,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getCurrentAveragePrice(options: IGetCurrentAveragePriceOptions) {
+  async getHashrateResaleDetail(options: IGetHashrateResaleDetailOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/avgPrice",
+        path: "/sapi/v1/mining/hash-transfer/profit/details",
         params: options,
       });
       return res.data;
@@ -127,11 +126,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async get24hrTickerPriceChangeStatistics(options: IGet24hrTickerPriceChangeStatisticsOptions = {}) {
+  async getStatisticList(options: IGetStatisticListOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/ticker/24hr",
+        path: "/sapi/v1/mining/statistics/user/status",
         params: options,
       });
       return res.data;
@@ -140,11 +139,11 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getSymbolPriceTicker(options: IGetSymbolPriceTickerOptions = {}) {
+  async getAccountList(options: IGetAccountListOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/ticker/price",
+        path: "/sapi/v1/mining/statistics/user/list",
         params: options,
       });
       return res.data;
@@ -153,26 +152,14 @@ export class BinanceSpotMarketApi extends BinanceApiClient {
     }
   }
 
-  async getSymbolOrderBookTicker(options: IGetSymbolPriceTickerOptions = {}) {
+  async getMiningAccountEarning(options: IGetMiningAccountEarningOptions) {
     try {
-      const res = await this.publicRequest({
+      const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/api/v3/ticker/bookTicker",
+        path: "/sapi/v1/mining/payment/uid",
         params: options,
       });
-      return res.data;
-    } catch (error) {
-      this.throwError(error?.response?.data);
-    }
-  }
-
-  async getRollingWindowPriceChangeStatistics(options: IGetRollingWindowPriceChangeStatisticsOptions = {}) {
-    try {
-      const res = await this.publicRequest({
-        method: RequestType.GET,
-        path: "/api/v3/ticker",
-        params: options,
-      });
+      console.log(res);
       return res.data;
     } catch (error) {
       this.throwError(error?.response?.data);

@@ -4,12 +4,9 @@ import { RequestType } from "../enums";
 import { BinanceApiClient } from "../httpClient";
 import { IApiClientInitializeOptions } from "../types";
 
-import { 
-  IGetC2CTradeHistoryOptions
-} from "./types";
+import { IGetSpotRebateHistoryRecordsOptions } from "./types";
 
-
-export class BinanceSpotC2CApi extends BinanceApiClient {
+export class BinanceSpotRebateApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
     this.baseApiUrl = BINANCE_API_URLS.SPOT.BASE;
@@ -17,11 +14,11 @@ export class BinanceSpotC2CApi extends BinanceApiClient {
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 
-  async getC2CTradeHistory(options: IGetC2CTradeHistoryOptions) {
+  async getSpotRebateHistoryRecords(options: IGetSpotRebateHistoryRecordsOptions = {}) {
     try {
       const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/sapi/v1/c2c/orderMatch/listUserOrderHistory",
+        path: "/sapi/v1/rebate/taxQuery",
         params: options,
       });
       return res.data;

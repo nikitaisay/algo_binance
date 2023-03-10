@@ -16,8 +16,8 @@ import {
 export class BinanceEuropeanOptionsMarketApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
-    this.baseApiUrl = BINANCE_API_URLS.EUROPEAN_OPTIONS.MARKET.BASE;
-    this.testnetUrl = BINANCE_API_URLS.EUROPEAN_OPTIONS.MARKET.TESTNET;
+    this.baseApiUrl = BINANCE_API_URLS.EUROPEAN_OPTIONS.BASE;
+    this.testnetUrl = BINANCE_API_URLS.EUROPEAN_OPTIONS.TESTNET;
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 

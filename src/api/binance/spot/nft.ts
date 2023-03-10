@@ -5,14 +5,13 @@ import { BinanceApiClient } from "../httpClient";
 import { IApiClientInitializeOptions } from "../types";
 
 import { 
-  IGetBLVTInfoOptions,
-  IQuerySubscriptionRecordOptions,
-  IQueryRedemptionRecordOptions,
-  IGetBLVTUserLimitInfoOptions
+  IGetNftAssetOptions,
+  IGetNftDepositHistoryOptions,
+  IGetNftTransactionHistoryOptions, 
+  IGetNftWithdrawHistoryOptions
 } from "./types";
 
-
-export class BinanceSpotBLVTApi extends BinanceApiClient {
+export class BinanceSpotNftApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
     this.baseApiUrl = BINANCE_API_URLS.SPOT.BASE;
@@ -20,58 +19,54 @@ export class BinanceSpotBLVTApi extends BinanceApiClient {
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 
-  async getBLVTInfo(options: IGetBLVTInfoOptions) {
-    try {
-      const res = await this.keyedRequest({
-        method: RequestType.GET,
-        path: "/sapi/v1/blvt/tokenInfo",
-        params: options,
-      });
-      return res.data;
-    } catch (error) {
-      console.log("error", error?.response?.data);
-      this.throwError(error?.response?.data);
-    }
-  }
-
-  async querySubscriptionRecord(options: IQuerySubscriptionRecordOptions = {}) {
+  async getNftTransactionHistory(options: IGetNftTransactionHistoryOptions) {
     try {
       const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/sapi/v1/blvt/subscribe/record",
+        path: "/sapi/v1/nft/history/transactions",
         params: options,
       });
       return res;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
 
-  async queryRedemptionRecord(options: IQueryRedemptionRecordOptions = {}) {
+  async getNftDepositHistory(options: IGetNftDepositHistoryOptions = {}) {
     try {
       const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/sapi/v1/blvt/redeem/record",
+        path: "/sapi/v1/nft/history/deposit",
         params: options,
       });
       return res;
     } catch (error) {
-      console.log("error", error?.response?.data);
       this.throwError(error?.response?.data);
     }
   }
 
-  async getBLVTUserLimitInfo(options: IGetBLVTUserLimitInfoOptions = {}) {
+  async getNftWithdrawHistory(options: IGetNftWithdrawHistoryOptions = {}) {
     try {
       const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/sapi/v1/blvt/userLimit",
+        path: "/sapi/v1/nft/history/withdraw",
         params: options,
       });
       return res;
     } catch (error) {
-      console.log("error", error?.response?.data);
+      this.throwError(error?.response?.data);
+    }
+  }
+
+  async getNftAsset(options: IGetNftAssetOptions = {}) {
+    try {
+      const res = await this.privateRequest({
+        method: RequestType.GET,
+        path: "/sapi/v1/nft/user/getAsset",
+        params: options,
+      });
+      return res;
+    } catch (error) {
       this.throwError(error?.response?.data);
     }
   }

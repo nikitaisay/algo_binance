@@ -14,8 +14,8 @@ import {
 export class BinanceSpotConvertApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
-    this.baseApiUrl = BINANCE_API_URLS.SPOT.MARKET.BASE;
-    this.testnetUrl = BINANCE_API_URLS.SPOT.MARKET.TESTNET;
+    this.baseApiUrl = BINANCE_API_URLS.SPOT.BASE;
+    this.testnetUrl = BINANCE_API_URLS.SPOT.TESTNET;
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 

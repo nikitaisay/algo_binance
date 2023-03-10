@@ -28,8 +28,8 @@ import {
 export class BinanceDelivaryFuturesMarketApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
-    this.baseApiUrl = BINANCE_API_URLS.DELIVERY_FUTURES.MARKET.BASE;
-    this.testnetUrl = BINANCE_API_URLS.DELIVERY_FUTURES.MARKET.TESTNET;
+    this.baseApiUrl = BINANCE_API_URLS.DELIVERY_FUTURES.BASE;
+    this.testnetUrl = BINANCE_API_URLS.DELIVERY_FUTURES.TESTNET;
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 

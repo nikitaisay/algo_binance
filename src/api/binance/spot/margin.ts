@@ -5,11 +5,10 @@ import { BinanceApiClient } from "../httpClient";
 import { IApiClientInitializeOptions } from "../types";
 
 import { 
-  IGetC2CTradeHistoryOptions
+  IGetCrossMarginTransferHistoryOptions 
 } from "./types";
 
-
-export class BinanceSpotC2CApi extends BinanceApiClient {
+export class BinanceSpotMarginApi extends BinanceApiClient {
   constructor(options: IApiClientInitializeOptions) {
     super(options);
     this.baseApiUrl = BINANCE_API_URLS.SPOT.BASE;
@@ -17,14 +16,14 @@ export class BinanceSpotC2CApi extends BinanceApiClient {
     this.url = options.enableTestnet ? this.testnetUrl : this.baseApiUrl;
   }
 
-  async getC2CTradeHistory(options: IGetC2CTradeHistoryOptions) {
+  async getCrossMarginTransferHistory(options: IGetCrossMarginTransferHistoryOptions = {}) {
     try {
       const res = await this.privateRequest({
         method: RequestType.GET,
-        path: "/sapi/v1/c2c/orderMatch/listUserOrderHistory",
+        path: "/sapi/v1/margin/transfer",
         params: options,
       });
-      return res.data;
+      return res;
     } catch (error) {
       this.throwError(error?.response?.data);
     }

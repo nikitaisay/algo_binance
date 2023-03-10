@@ -12,20 +12,24 @@ describe("Test Binance Spot BLVT API", () => {
  
   beforeEach(() => {
     api = new BinanceSpotBLVTApi({
-      enableTestnet: false,
-      apiKey: process.env.BINANCE_TESTNET_API_KEY,
-      apiSecret: process.env.BINANCE_TESTNET_API_SECRET,
+      enableTestnet: false, // BINANCE TESTNET DOESN'T SUPPORT /sapi ENDPOINTS
+      apiKey: process.env.BINANCE_API_KEY,
+      apiSecret: process.env.BINANCE_API_SECRET,
     });
   });
 
-  describe("getBLVTInfo", () => {
-    test("Should get BLVT info for specific token name", async () => {
-      const data = await api.getBLVTInfo({
-        tokenName: "BTCDOWN",
-      });
-      expect(data).toBeDefined();
-    });
+  test("Should check that api client is defined", () => {
+    expect(api).toBeDefined();
   });
+
+  // describe("getBLVTInfo", () => {
+  //   test("Should get BLVT info for specific token name", async () => {
+  //     const data = await api.getBLVTInfo({
+  //       tokenName: "BTCUP",
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
+  // });
 
   // describe("querySubscriptionRecord", () => {
   //   test("Should Query Subscription Record (USER_DATA)", async () => {

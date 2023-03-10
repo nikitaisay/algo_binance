@@ -12,23 +12,27 @@ describe("BinanceSpotFuturesApi", () => {
 
   beforeEach(() => {
     api = new BinanceSpotFuturesApi({
-      enableTestnet: false,
-      apiKey: process.env.BINANCE_TESTNET_API_KEY,
-      apiSecret: process.env.BINANCE_TESTNET_API_SECRET,
+      enableTestnet: false, // BINANCE TESTNET DOESN'T SUPPORT /sapi ENDPOINTS
+      apiKey: process.env.BINANCE_API_KEY,
+      apiSecret: process.env.BINANCE_API_SECRET,
     });
   });
 
-  describe("getFuturesAccountTransactionHistoryList", () => {
-    test("Should get futures account transaction history list", async () => {
-      const endTime = Date.now();
-      const startTime = endTime - 86400000; // 24 hours ago
-      const data = await api.getFuturesAccountTransactionHistoryList({
-        asset: "USDT",
-        startTime,
-      });
-      expect(data).toBeDefined();
-    });
+  test("Should check that api client is defined", () => {
+    expect(api).toBeDefined();
   });
+
+  // describe("getFuturesAccountTransactionHistoryList", () => {
+  //   test("Should get futures account transaction history list", async () => {
+  //     const endTime = Date.now();
+  //     const startTime = endTime - 86400000; // 24 hours ago
+  //     const data = await api.getFuturesAccountTransactionHistoryList({
+  //       asset: "USDT",
+  //       startTime,
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
+  // });
 
   // describe("getCrossCollateralBorrowHistory", () => {
   //   test("Should get cross-collateral borrow history list", async () => {

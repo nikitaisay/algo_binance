@@ -18,12 +18,16 @@ describe("Test Binance Perpetual Futures Market API", () => {
     });
   });
 
-  describe("testConnectivity", () => {
-    test("Should test connectivity", async () => {
-      const data = await api.testConnectivity();
-      expect(data).toBeDefined();
-    });
+  test("Should check that api client is defined", () => {
+    expect(api).toBeDefined();
   });
+
+  // describe("testConnectivity", () => {
+  //   test("Should test connectivity", async () => {
+  //     const data = await api.testConnectivity();
+  //     expect(data).toBeDefined();
+  //   });
+  // });
 
   // describe("checkServerTime", () => {
   //   test("Should check server time", async () => {

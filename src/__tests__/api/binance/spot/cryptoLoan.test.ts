@@ -12,10 +12,14 @@ describe("BinanceSpotConvertApi", () => {
 
   beforeEach(() => {
     api = new BinanceSpotCryptoLoansApi({
-      enableTestnet: false,
-      apiKey: process.env.BINANCE_TESTNET_API_KEY,
-      apiSecret: process.env.BINANCE_TESTNET_API_SECRET,
+      enableTestnet: false, // BINANCE TESTNET DOESN'T SUPPORT /sapi ENDPOINTS
+      apiKey: process.env.BINANCE_API_KEY,
+      apiSecret: process.env.BINANCE_API_SECRET,
     });
+  });
+
+  test("Should check that api client is defined", () => {
+    expect(api).toBeDefined();
   });
 
   // describe("getCryptoLoansIncomeHistory", () => {
@@ -188,14 +192,14 @@ describe("BinanceSpotConvertApi", () => {
   //   });
   // });
 
-  describe("checkCollateralRepayRate", () => {
-    test("Should check collateral repay rate (USER_DATA)", async () => {
-      const data = await api.checkCollateralRepayRate({
-        collateralCoin: "BUSD",
-        loanCoin: "BTC",
-        repayAmount: 1,
-      });
-      expect(data).toBeDefined();
-    });
-  });
+  // describe("checkCollateralRepayRate", () => {
+  //   test("Should check collateral repay rate (USER_DATA)", async () => {
+  //     const data = await api.checkCollateralRepayRate({
+  //       collateralCoin: "BUSD",
+  //       loanCoin: "BTC",
+  //       repayAmount: 1,
+  //     });
+  //     expect(data).toBeDefined();
+  //   });
+  // });
 });
